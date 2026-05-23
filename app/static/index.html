@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual AI Personal Assistants Dashboard</title>
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="dashboard-container">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <span class="logo-icon">🚀</span>
+                <div class="header-titles">
+                    <h1>DUAL ASSISTANT HUB</h1>
+                    <p class="subtitle">Frontier vs Open Source Comparison Engine</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="clear-session-btn" class="btn secondary-btn" title="Reset Conversational Memory">
+                    <span class="icon">🧹</span> Clear Memory
+                </button>
+                <div class="session-badge">
+                    <span>Session ID:</span>
+                    <span id="session-id-display" class="session-id">loading...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Comparison Workspace -->
+        <main class="workspace">
+            
+            <!-- Left Panel: Frontier Assistant (Gemini) -->
+            <section class="assistant-card frontier-card">
+                <div class="card-header">
+                    <div class="model-info">
+                        <span class="status-indicator online"></span>
+                        <div class="model-details">
+                            <h2>Frontier Model</h2>
+                            <p class="model-tag font-accent">gemini-flash-lite-latest</p>
+                        </div>
+                    </div>
+                    <div class="telemetry-badge">
+                        <span class="telemetry-label">Latency:</span>
+                        <span id="frontier-latency" class="telemetry-value">--</span>
+                    </div>
+                </div>
+                <div id="frontier-chat-log" class="chat-log">
+                    <div class="system-bubble">
+                        <p>🤖 Frontier Assistant initialized. Ready to receive prompts.</p>
+                    </div>
+                </div>
+                <div class="card-footer-stats">
+                    <span id="frontier-status-text">Connected</span>
+                </div>
+            </section>
+
+            <!-- Right Panel: Open Source Assistant (Ollama) -->
+            <section class="assistant-card oss-card">
+                <div class="card-header">
+                    <div class="model-info">
+                        <span id="oss-status-indicator" class="status-indicator offline"></span>
+                        <div class="model-details">
+                            <h2>Open Source Model</h2>
+                            <select id="ollama-model-selector" class="model-dropdown">
+                                <option value="" disabled selected>Loading local models...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="telemetry-badge">
+                        <span class="telemetry-label">Latency:</span>
+                        <span id="oss-latency" class="telemetry-value">--</span>
+                    </div>
+                </div>
+                <div id="oss-chat-log" class="chat-log">
+                    <div class="system-bubble">
+                        <p>💻 Open Source Assistant. Make sure local Ollama is running.</p>
+                    </div>
+                </div>
+                <div class="card-footer-stats">
+                    <span id="oss-status-text">Checking local service...</span>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Shared Input Console -->
+        <footer class="input-console">
+            <form id="chat-form" class="input-form">
+                <div class="mode-toggle-bar">
+                    <span class="mode-label">Send Mode:</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="send-both-toggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                    <span class="mode-desc" id="mode-desc-text">Query Both Simultaneously</span>
+                </div>
+                <div class="input-row">
+                    <textarea 
+                        id="user-input" 
+                        placeholder="Type a message to compare both models..." 
+                        rows="1" 
+                        required
+                    ></textarea>
+                    <button type="submit" id="send-btn" class="btn primary-btn">
+                        <span>Send</span>
+                        <span class="btn-icon">⚡</span>
+                    </button>
+                </div>
+            </form>
+        </footer>
+
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
